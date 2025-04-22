@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | rojGar.com</title>
+    <link rel="stylesheet" href="/Styles/register.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Slab:wght@400;500;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+</head>
+<body>
+    <!-- Header -->
+    <div id="header">
+        <div>
+            <a href="index.html">
+                <img src="rojgar1.jpg" alt="rojGar.com">
+            </a>
+        </div>
+        <div>
+            <p>Already Registered?<a href="login.html">Login</a> here</p>
+        </div>
+    </div>
+    <hr>
+
+    <!-- Main Content -->
+    <div class="main">
+        <!-- Left Container -->
+        <div class="left-container">
+            <div id="static-part">
+                <div class="static-point">
+                    <img src="https://static.naukimg.com/s/7/104/assets/images/green-boy.c8b59289.svg" alt="Register Benefits">
+                    <h2>On registering, you can</h2>
+                    <ul>
+                        <li><i class="fas fa-check"></i><p>Build your profile and let recruiters find you</p></li>
+                        <li><i class="fas fa-check"></i><p>Get job postings delivered right to your email</p></li>
+                        <li><i class="fas fa-check"></i><p>Find a job and grow your career</p></li>
+                    </ul>
+                </div>              
+            </div>            
+        </div>
+
+        <!-- Right Container -->
+        <div class="right-container">
+            <!-- Registration Form -->
+            <form id="form">
+                <h1>Find a job & grow your career</h1>
+                
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" placeholder="What is your name?" id="name">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Id</label>
+                    <input type="email" placeholder="Tell us your Email ID" id="email">
+                    <p>We'll send you relevant jobs in your mail</p>
+                </div>
+                
+                <div class="form-group">
+                    <label for="pass">Password</label>
+                    <input type="password" placeholder="Create a password for your account" id="pass">
+                    <p>Password is required</p>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Mobile</label>
+                    <input type="tel" placeholder="Mobile Number" id="phone">
+                    <p>Recruiters will call you on this number</p>
+                </div>
+                
+                <div class="form-group">
+                    <label>Work Status</label>
+                    <div class="work-status">
+                        <div class="sub" onclick="selectWorkStatus('experienced')">
+                            <i class="fa fa-briefcase" aria-hidden="true"></i>
+                            <div>
+                                <h3>I'm Experienced</h3>
+                                <p>I have work experience (excluding internships)</p>
+                            </div>
+                        </div>
+                        <div class="sub" onclick="selectWorkStatus('fresher')">
+                            <i class="fa fa-briefcase" aria-hidden="true"></i>
+                            <div>
+                                <h3>I'm Fresher</h3>
+                                <p>I am a student/Haven't work after graduation</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Resume</label>
+                    <div class="resume" onclick="document.getElementById('resume-upload').click()">
+                        <div>Upload Resume</div>
+                        <p>DOC, DOCx, PDF, RTF | Max: 2MB</p>
+                        <input type="file" id="resume-upload" style="display: none;">
+                    </div>
+                    <p>Recruiters give first preference to candidates who have a resume</p>
+                </div>
+                
+                <div class="notifiy">
+                    <input type="checkbox" id="whatsapp-notify" style="margin-right: 0.5rem;">
+                    <p>Send me important updates on</p>
+                    <i class="fab fa-whatsapp"></i>
+                    <p>WhatsApp</p>
+                </div>
+                
+                <p class="bott">By clicking Register, you agree to the Terms and Conditions of Naukri.com</p>
+                
+                <button type="submit" class="register">Register Now</button>
+                
+                <p>About Us | Contact Us | FAQs | Terms and Conditions | Report a Problem | Privacy Policy</p>
+                <p>All rights reserved © 2022 Info Edge India Ltd</p>
+            </form>
+
+            <!-- Google Sign-in -->
+            <div class="google-box">
+                <h3>Continue with</h3>
+                <div class="google" onclick="signInWithGoogle()">
+                    <img src="https://static.naukimg.com/s/7/104/assets/images/google-icon.9273ac87.svg" alt="Google">
+                    <h4>Google</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Work Status Selection
+        function selectWorkStatus(status) {
+            const options = document.querySelectorAll('.work-status .sub');
+            options.forEach(option => {
+                option.style.borderColor = '#d3e1ea';
+                option.style.backgroundColor = 'transparent';
+            });
+            
+            const selectedOption = document.querySelector(`.work-status .sub:nth-child(${status === 'experienced' ? 1 : 2})`);
+            selectedOption.style.borderColor = 'var(--primary)';
+            selectedOption.style.backgroundColor = 'rgba(37, 99, 235, 0.05)';
+            
+            // In a real app, you would store this selection
+            console.log(`Selected work status: ${status}`);
+        }
+
+        // Resume Upload
+        document.getElementById('resume-upload').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const resumeDiv = document.querySelector('.resume div');
+                resumeDiv.textContent = file.name;
+                resumeDiv.style.color = 'var(--primary)';
+                
+                // In a real app, you would upload the file to your server
+                console.log(`Selected file: ${file.name}`);
+            }
+        });
+
+        // Google Sign-in
+        function signInWithGoogle() {
+            // In a real app, this would integrate with Google OAuth
+            alert('Redirecting to Google sign-in...');
+        }
+
+        // Form Submission
+        document.getElementById('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Form validation would go here
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('pass').value;
+            const phone = document.getElementById('phone').value;
+            
+            if (!name || !email || !password || !phone) {
+                alert('Please fill in all required fields');
+                return;
+            }
+            
+            // In a real app, you would send this data to your server
+            console.log('Registration submitted:', { name, email, password, phone });
+            alert('Registration successful! Redirecting to your dashboard...');
+        });
+    </script>
+</body>
+</html>
